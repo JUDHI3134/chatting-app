@@ -56,3 +56,8 @@ export const login = async (req, res) => {
         return res.json({success: false, message:error.message})
     }
 }
+
+//controller to check if user is authenticated or not
+export const checkAuth = (req, res) => {
+    res.json({success: true, user: req.user})
+}
