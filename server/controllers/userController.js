@@ -33,3 +33,26 @@ export const signup = async (req, res) => {
         return res.json({success: false, message:error.message})
     }
 }
+
+//controller to login a user
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body
+        const userData = await User.findOne({ email })
+        
+        const isPasswordCorrect = await bcrypt.compare(password, userData.password)
+
+        if (!isPasswordCorrect) {
+            return res.json({success: false, message: "Invalid Credentials"})
+        }
+
+        const token = generateToken(userData._id)
+
+        res.json({success: true, userData, token, message: "Login Successful"})
+
+
+    } catch (error) {
+        console.log(error.message)
+        return res.json({success: false, message:error.message})
+    }
+}
