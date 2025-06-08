@@ -13,7 +13,6 @@ const Sidebar = () => {
 
     const filteredUsers = input ? (users || []).filter((user) => user.fullName.toLowerCase().includes(input.toLowerCase())) : users || [];
 
-    console.log(filteredUsers)
 
     useEffect(() => {
         getUsers()
